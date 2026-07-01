@@ -30,7 +30,7 @@ class UserController extends Controller {
             "name", 
             'email',
             'password',
-            'birthDate',
+        
         ]));
 
         $userResponse = $this->userService->saveUser($user);
@@ -38,9 +38,24 @@ class UserController extends Controller {
 
     }
 
+    public function update(int $id, Request $request) : JsonResponse{
+        $user = new User($request->only([
+            "name", 
+            'email',
+            'password',
+            
+        ]));
+
+        $userResponse = $this->userService->updateUser($id, $user);
+        return response()->json($userResponse, 200);
+    
+
+    }
+
+
     public function delete(int $id) : JsonResponse {
         $this->userService->deleteUser($id);
-        return response()->json(204);
+        return response()->json(null, 204);
     }
 
 }

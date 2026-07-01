@@ -35,18 +35,22 @@ class UserService {
         return $user;
     }
 
-    public function saveUser(User $user) : User {
-        $userFound = $this->repository->findByEmail($user->email);
-        if($userFound) {
+    public function saveUser(User $newUser) : User {
+        $user = $this->repository->findByEmail($newUser->email);
+        if($user) {
             throw ValidationException::withMessages(['user_email' => ['Email already exists']]);
         }
-         return $this->repository->save($user);
+         return $this->repository->save($newUser);
     }
 
 
-    public function updateUser(int $id, User $user) : ?User {
+    public function updateUser(int $id, User $newUser) : ?User {
         $user = $this->findUserById($id);
+        $user->name = $newUser->name;
+        $user->email = $newUser->email;
+        $user->password = $newUser->password;
         return $this->repository->update($id, $user);
+
     }
 
     public function deleteUser(int $id) : void {

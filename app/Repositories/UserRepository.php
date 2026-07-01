@@ -20,7 +20,7 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function findByEmail(string $email) : ?User {
-        return User::find($email);
+        return User::where('email', $email)->first();
 
     }
 
@@ -30,9 +30,9 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function update(int $id, User $user) : ?User {
-        $userUpdated = $this->findById($id);
-        $userUpdated->update($user);
-        return $userUpdated;
+        $user->save();
+        return $user;
+ 
         
     }
 
