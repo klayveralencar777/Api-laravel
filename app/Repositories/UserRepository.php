@@ -20,25 +20,18 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function findByEmail(string $email) : ?User {
-        return User::find($email);
+        return User::where('email', $email)->first();
 
     }
 
     public function save(User $user) : User{
-       $user->save();
-       return $user;
+        $user->save();
+        return $user;
     }
 
-    public function update(int $id, User $user) : ?User {
-        $userUpdated = $this->findById($id);
-        $userUpdated->update($user);
-        return $userUpdated;
-        
-    }
 
     public function destroy(int $id) : void {
-        $userDeleted = $this->findById($id);
-        $userDeleted->destroy($id);
+        User::destroy($id);
         
     }
 
