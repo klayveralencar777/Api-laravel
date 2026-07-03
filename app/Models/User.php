@@ -10,5 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 #[Fillable(["name", "email", "password"])]
 class User extends Authenticatable
 {
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
     
 }

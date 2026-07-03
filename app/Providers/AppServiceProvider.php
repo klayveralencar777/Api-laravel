@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\ReviewRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Repositories\UserRepository;
+use App\Repositories\Implementation\ReviewRepository;
+use App\Repositories\Implementation\UserRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             UserRepositoryInterface::class,
             UserRepository::class
+        );
+
+        $this->app->bind(
+            ReviewRepositoryInterface::class,
+            ReviewRepository::class
         );
     }
 
