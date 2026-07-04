@@ -12,6 +12,15 @@ Route::prefix('v1')->group(function (): void {
     Route::put('/users/{id}', [UserController::class, 'update']);
     Route::delete('/users/{id}', [UserController::class, 'delete']);
     Route::post('/auth', [AuthController::class, 'login']);
-    Route::get('/reviews', [ReviewController::class, 'index']);
+    
+    Route::middleware(['auth.custom'])->group(function() {
+        Route::get('/auth/me', [AuthController::class, 'me']);
+        Route::post('/auth/logout', [AuthController::class, 'logout']);
+        Route::get('/reviews', [ReviewController::class, 'index']);
+        Route::get('/reviews/{id}', [ReviewController::class, 'showById']);
+        Route::post('/reviews', [ReviewController::class, 'store']);
+        
+
+    });
     
 });

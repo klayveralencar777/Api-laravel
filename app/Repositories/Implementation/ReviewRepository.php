@@ -5,13 +5,13 @@ use App\Repositories\Contracts\ReviewRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReviewRepository implements ReviewRepositoryInterface {
-    #[Override]
+   
     public function findAll(): Collection
     {
         return Review::all();
     }
 
-    #[Override]
+    
     public function findById(int $id): ?Review
     {
         return Review::find($id);
