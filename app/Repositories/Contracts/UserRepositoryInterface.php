@@ -16,7 +16,6 @@ interface UserRepositoryInterface {
 
     public function save(User $user) : User;
 
-    public function update(int $id, User $user) : ?User;
 
     public function destroy(int $id) : void;
     

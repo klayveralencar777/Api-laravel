@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Implementation;
 
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -25,20 +25,22 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function save(User $user) : User{
-       $user->save();
-       return $user;
+        $user->save();
+        return $user;
     }
 
+<<<<<<< HEAD:app/Repositories/UserRepository.php
     public function update(int $id, User $user) : ?User {
         $user->save();
         return $user;
  
         
     }
+=======
+>>>>>>> develop:app/Repositories/Implementation/UserRepository.php
 
     public function destroy(int $id) : void {
-        $userDeleted = $this->findById($id);
-        $userDeleted->destroy($id);
+        User::destroy($id);
         
     }
 
