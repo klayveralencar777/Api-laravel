@@ -29,15 +29,6 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
-<<<<<<< HEAD:app/Repositories/UserRepository.php
-    public function update(int $id, User $user) : ?User {
-        $user->save();
-        return $user;
- 
-        
-    }
-=======
->>>>>>> develop:app/Repositories/Implementation/UserRepository.php
 
     public function destroy(int $id) : void {
         User::destroy($id);
