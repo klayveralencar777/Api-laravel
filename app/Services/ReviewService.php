@@ -7,13 +7,19 @@ use App\Repositories\Contracts\ReviewRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\ValidationException as ValidationValidationException;
 
-use function Laravel\Prompts\title;
+
 
 class ReviewService {
     public function __construct(private ReviewRepositoryInterface $repository){}
 
     public function findAllReviews(): Collection {
         return $this->repository->findAll();
+    }
+
+    public function myReviews(int $userId): Collection {
+        return $this->repository->findMyReviews($userId);
+        
+
     }
 
     public function findReviewById(int $id) : ?Review {

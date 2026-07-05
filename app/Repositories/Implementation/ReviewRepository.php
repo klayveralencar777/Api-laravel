@@ -11,6 +11,10 @@ class ReviewRepository implements ReviewRepositoryInterface {
         return Review::all();
     }
 
+    public function findMyReviews(int $userId): Collection {
+        return Review::where('user_id', $userId)->get();
+    }
+
     
     public function findById(int $id): ?Review
     {

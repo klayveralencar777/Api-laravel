@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,9 @@ class AuthService {
 
         return [
             'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => Auth::guard('api')->user(),
-        ];
+            'token_type' => 'Bearer',   
+            'user' => new UserResource(Auth::guard('api')->user()),
+            ];
     }
 
     public function logout(): void {

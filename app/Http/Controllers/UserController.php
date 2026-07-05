@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest as RequestsStoreUserRequest;
 use App\Http\Requests\UpdateUserRequest as RequestsUpdateUserRequest;
+use App\Http\Resources\UserResource;
 use App\Services\UserService;
 
 use App\Models\User;
@@ -24,7 +25,8 @@ class UserController extends Controller {
 
     public function showById(int $id) : JsonResponse {
         $user =  $this->userService->findUserById($id);
-        return response()->json($user, 200);
+        $userResource = new UserResource($user);
+        return response()->json($userResource, 200);
     }
 
     public function store(RequestsStoreUserRequest $request) : JsonResponse {

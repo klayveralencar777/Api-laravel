@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReviewRequest;
+use App\Http\Requests\UpdateReviewRequest;
 use App\Models\Review;
 use App\Services\ReviewService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ReviewController {
     public function __construct(private ReviewService $service)
@@ -17,6 +19,11 @@ class ReviewController {
         $reviews = $this->service->findAllReviews();
         return response()->json($reviews);
 
+    }
+
+    public function indexMyReviews(Request $request) : JsonResponse {  
+        $reviews = $this->service->myReviews($request->user()->id);
+        return response()->json($reviews);
     }
 
     public function showById(int $id) : JsonResponse {
@@ -33,6 +40,19 @@ class ReviewController {
         return response()->json($newReview);
     }
 
+    public function update(int $id, UpdateReviewRequest $request) : JsonResponse {
+        $review = new Review([
+             ...$request->validated(),
+             'user_id' => auth('api')->id(),
+        ]);
+        $updateReview = $this->service->updateReview($id, $review);
+        return response()->json($updateReview);
+    }
+
+    public function destroy(int $id) : JsonResponse {
+        $this->service->deleteReview($id);
+        return response()->json("Review removida com sucesso!", 204);
+    }
 
     
 
